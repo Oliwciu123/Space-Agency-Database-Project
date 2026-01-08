@@ -4,39 +4,55 @@
 This project presents a comprehensive database architecture designed for "Space-U," a modern interplanetary travel agency. The system is engineered to handle the full operational cycle of a space agency: from technical fleet management (rockets, spacecraft), through mission logistics (destinations, expeditions), to customer service, financial backing (sponsors), and post-flight satisfaction analysis.
 
 ## ⚠️ Language Note
-Please note that while this documentation is in English, the **database schema (table and column names), Jupyter Notebook cell descriptions, and internal project comments are in Polish**, as the project was originally developed for a Polish university course.
+Please note that while this documentation is in English, the **database schema (table and column names), Jupyter Notebook cell descriptions, and internal project comments are in Polish**, as the project was originally developed for a Polish university course. All filenames are also kept in their original Polish form for consistency with the repository content.
 
 ## 🛠️ Tech Stack
 * **Database:** MariaDB / MySQL
 * **Language:** Python 3.x
-* **Libraries:** * `SQLAlchemy` (ORM & Database communication)
-    * `Pandas` (Data processing)
-    * `Matplotlib` / `Seaborn` (Data visualization)
-    * `Faker` (Automated mass data seeding)
+* **Libraries:** `SQLAlchemy`, `Pandas`, `Matplotlib`, `Faker`
 * **Tools:** Jupyter Notebook, SQL
 
-## 📂 Repository Structure
-* `/sql/baza.sql` – Core SQL script defining table structures, primary keys, and constraints (Polish naming convention).
-* `/notebooks/01_data_seeding.ipynb` – Python script automating the database population process.
-* `/notebooks/02_data_analysis.ipynb` – Analytical module generating business reports and visual insights.
-* `/docs/` – Project documentation, including the ERD diagram and functional dependencies.
+## 📂 Project Structure & Execution Guide
+
+Follow these steps to set up and explore the project:
+
+### **Step 1: Create the Database**
+**File:** `baza.sql`  
+This SQL file contains the complete definition of the relational database structure in MariaDB. It creates all tables required for the system, including:
+* **Obsluga** – employee data,
+* **Wyprawy, Rodzaje_Wypraw, Kierunki_Wypraw** – information about space missions, their types, destinations, duration, and vehicles,
+* **Klienci, Rezerwacje, Opinie_Klientow** – customer data, bookings, and reviews,
+* **Koszty, Rakiety, Pojazdy_Kosmiczne, Typy_Pojazdow** – technical and financial infrastructure,
+* **Sponsorzy, Wspieramy, Partnerzy_Strategiczni** – data on collaborations, support, foundations, and sponsors.
+
+**Action:** Import this file into your MariaDB database to initialize the schema.
+
+### **Step 2: Data Population**
+**File:** `wypełnianie_bazy.ipynb`  
+A Jupyter Notebook written in Python using SQLAlchemy. It automatically generates and inserts realistic data into the previously created tables. It includes:
+* Filling tables: Klienci, Rezerwacje, Opinie_Klientow, Sponsorzy, Wspieramy, Partnerzy_Strategiczni,
+* Randomly assigning expedition ratings and customer comments,
+* Handling complex relationships between entities (e.g., id_pojazdu, id_klienta, id_fundacji).
+
+**Action:** Run this notebook after creating the database to fill it with sample data.
+
+### **Step 3: Data Analysis**
+**File:** `analiza_bazy_danych.ipynb`  
+An analytical notebook designed for data exploration and verification using Pandas and Matplotlib. It includes:
+* Summaries of booking counts, ratings, and customer totals,
+* Ranking of expeditions based on average ratings,
+* Data visualizations and statistics.
+
+**Action:** Run this notebook after the database has been populated to analyze and present the data.
 
 ## 📐 Logical Structure & Normalization (3NF)
 
-THE PROJECT WAS DEVELOPED WITH A FOCUS ON ARCHITECTURAL INTEGRITY AND ADHERENCE TO RELATIONAL DATABASE DESIGN PRINCIPLES:
+THE PROJECT WAS DEVELOPED WITH A FOCUS ON ARCHITECTURAL INTEGRITY:
 
-* **RELATIONAL STRUCTURE:** THE SYSTEM IS BUILT AROUND THE CENTRAL **WYPRAWY** (EXPEDITIONS) ENTITY, WHICH INTEGRATES TECHNICAL DATA (RAKIETY, POJAZDY), LOGISTICS (KIERUNKI), AND PERSONNEL (OBSŁUGA, KLIENCI).
-* **ELIMINATION OF REDUNDANCY:** BY APPLYING THE THIRD NORMAL FORM (3NF), EVERY PIECE OF INFORMATION (E.G., CUSTOMER DATA OR ROCKET SPECIFICATIONS) IS STORED ONLY ONCE, ELIMINATING THE RISK OF ANOMALIES DURING DATA UPDATES OR DELETION.
-* **FUNCTIONAL DEPENDENCIES:** EVERY NON-KEY ATTRIBUTE IS FULLY FUNCTIONALLY DEPENDENT ON THE PRIMARY KEY (E.G., **ID_MIEJSCA → GRAWITACJA, WSPÓŁRZĘDNE**). THE ABSENCE OF TRANSITIVE DEPENDENCIES ENSURES HIGH PERFORMANCE AND DATA CONSISTENCY.
-* **REFERENTIAL INTEGRITY:** THE SYSTEM ENFORCES FOREIGN KEYS, PREVENTING THE CREATION OF "ORPHAN" RECORDS, SUCH AS RESERVATIONS FOR NON-EXISTENT CUSTOMERS OR MISSIONS.
-
-
-
-## 🚦 Setup & Execution Guide
-
-1.  **Schema Initialization:** Import the `sql/baza.sql` file into your MariaDB/MySQL server to create the database skeleton.
-2.  **Data Generation:** Open `notebooks/01_data_seeding.ipynb`. Update your database credentials in the `create_engine` section and run all cells to populate the system with realistic test data.
-3.  **Business Analysis:** Run `notebooks/02_data_analysis.ipynb` to generate sales reports, technical statistics, and export the final summary to an HTML report.
+* **RELATIONAL STRUCTURE:** THE SYSTEM INTEGRATES TECHNICAL DATA (RAKIETY, POJAZDY), LOGISTICS (KIERUNKI), AND PERSONNEL (OBSŁUGA, KLIENCI) THROUGH THE CENTRAL **WYPRAWY** ENTITY.
+* **ELIMINATION OF REDUNDANCY:** BY APPLYING THE THIRD NORMAL FORM (3NF), INFORMATION IS STORED WITHOUT UNNECESSARY REPETITION, ELIMINATING THE RISK OF DATA ANOMALIES.
+* **FUNCTIONAL DEPENDENCIES:** EVERY NON-KEY ATTRIBUTE IS FULLY FUNCTIONALLY DEPENDENT ON THE PRIMARY KEY (E.G., **ID_MIEJSCA → GRAWITACJA**).
+* **REFERENTIAL INTEGRITY:** THE SYSTEM ENFORCES FOREIGN KEYS TO ENSURE DATA CONSISTENCY ACROSS ALL TABLES.
 
 ---
 *University Project - Database Systems Course.*
