@@ -1,0 +1,109 @@
+SZCZEGÓŁOWY OPIS LOGICZNEJ STRUKTURY DANYCH I DOWÓD POPRAWNEJ NORMALIZACJI BAZY
+SZCZEGÓŁOWY OPIS LOGICZNEJ STRUKTURY DANYCH I DOWÓD POPRAWNEJ NORMALIZACJI BAZY
+SZCZEGÓŁOWY OPIS LOGICZNEJ STRUKTURY DANYCH I DOWÓD POPRAWNEJ NORMALIZACJI BAZY
+-----------------------------------------------------------------------------------------------
+1. Obsluga
+Zależności funkcyjne:
+
+id_pracownika → imie, nazwisko, pesel, stanowisko, wynagrodzenie, email, aktywny
+
+Wyjaśnienie: Klucz główny jednoznacznie identyfikuje dane każdego pracownika.
+-----------------------------------------------------------------------------------------------
+2. Typy_Pojazdow
+Zależności funkcyjne:
+
+id_typu → nazwa, opis, pojemnosc_pasazerow, zasieg_km, predkosc_max_kmh
+
+Wyjaśnienie: Każdy typ pojazdu (np. luksusowy, zwiadowczy) ma stałe, unikalne cechy techniczne.
+-----------------------------------------------------------------------------------------------
+3. Rakiety
+Zależności funkcyjne:
+
+id_rakiety → nazwa, producent, udzwig_kg, koszt_startu, liczba_uzyc, status_operacyjny
+
+Wyjaśnienie: Identyfikator rakiety określa pełny zestaw jej właściwości.
+-----------------------------------------------------------------------------------------------
+4. Kierunki_Wypraw
+Zależności funkcyjne:
+
+id_miejsca → nazwa, typ, wspolrzedne_x/y/z, odleglosc_od_ziemi_km, grawitacja_g, poziom_ryzyka
+
+Wyjaśnienie: Jedno miejsce docelowe ma jednoznacznie określone współrzędne i ryzyko.
+-----------------------------------------------------------------------------------------------
+5. Pojazdy_Kosmiczne
+Zależności funkcyjne:
+
+id_pojazdu → nazwa, id_typu, data_produkcji, ostatni_przeglad, status_operacyjny
+
+Wyjaśnienie: Każdy pojazd ma przypisany typ, historię przeglądów i własny stan operacyjny.
+-----------------------------------------------------------------------------------------------
+6. Koszty
+Zależności funkcyjne:
+
+id_kosztu → id_wyprawy, kategoria, opis, kwota, data_poniesienia
+
+Wyjaśnienie: Każdy koszt operacyjny dotyczy jednej wyprawy i ma jednoznaczne parametry.
+-----------------------------------------------------------------------------------------------
+7. Rodzaje_Wypraw
+Zależności funkcyjne:
+
+id_rodzaju → nazwa, opis, czas_trwania_dni, id_miejsca_docelowego, cena_bazowa, poziom_trudnosci
+
+Wyjaśnienie: Rodzaj wyprawy (np. „Orbita Marsa”) determinuje wszystkie jej cechy.
+-----------------------------------------------------------------------------------------------
+8. Klienci
+Zależności funkcyjne:
+
+id_klienta → imie, nazwisko, pesel, email, telefon, wyniki_badan
+
+Wyjaśnienie: Klient identyfikowany przez ID ma jeden zestaw danych i status zdrowotny.
+-----------------------------------------------------------------------------------------------
+9. Wyprawy
+Zależności funkcyjne:
+
+id_wyprawy → id_rodzaju_wyprawy, id_pojazdu, id_rakiety, id_pilota, data_startu, data_powrotu, status_wyprawy
+
+Wyjaśnienie: Każda wyprawa to pojedyncza misja, o znanym planie, pojeździe i obsłudze.
+-----------------------------------------------------------------------------------------------
+10. Kontakty_Awaryjne
+Zależności funkcyjne:
+
+id_kontaktu → id_klienta, imie, nazwisko, stopien_pokrewienstwa, telefon
+
+Wyjaśnienie: Dla każdego kontaktu awaryjnego zapisany jest przypisany klient.
+-----------------------------------------------------------------------------------------------
+11. Rezerwacje
+Zależności funkcyjne:
+
+id_rezerwacji → id_klienta, id_wyprawy, data_rezerwacji, cena_koncowa, status_platnosci, metoda_platnosci
+
+Wyjaśnienie: Każda rezerwacja dotyczy jednej osoby na jedną wyprawę w danym momencie.
+-----------------------------------------------------------------------------------------------
+12. Opinie_Klientow
+Zależności funkcyjne:
+
+id_oceny → id_klienta, id_wyprawy, ocena, komentarz, czy_poleca
+
+Wyjaśnienie: Jedna opinia dotyczy jednej osoby i jednej wyprawy.
+-----------------------------------------------------------------------------------------------
+13. Sponsorzy
+Zależności funkcyjne:
+
+id_sponsora → nazwa, kraj, typ, kwota_wsparcia, data_poczatku_wspolpracy
+
+Wyjaśnienie: Każdy sponsor ma jednoznaczne dane instytucjonalne i finansowe.
+-----------------------------------------------------------------------------------------------
+14. Wspieramy
+Zależności funkcyjne:
+
+id_fundacji → nazwa, kraj, forma_pomocy, data_rozpoczecia_wspolpracy
+
+Wyjaśnienie: Fundacje wspierane mają jasno przypisane formy współpracy.
+-----------------------------------------------------------------------------------------------
+15. Partnerzy_Strategiczni
+Zależności funkcyjne:
+
+id_partnera → nazwa, branża, kontakt_email, status_wspolpracy
+
+Wyjaśnienie: Każdy partner jest jednoznacznie identyfikowany i opisany branżowo.
+
